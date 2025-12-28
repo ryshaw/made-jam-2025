@@ -5,35 +5,49 @@ signal health_updated(new_val : int, max_val : int)
 @export var health : int = 10
 @export var max_health : int = 10
 @export var damage : int = 1
-@export var fire_range : int = 400
-@export var fire_rate : float = 0.2 # test value
+@export var fire_range : int = 500
+@export var fire_rate : float = 0.5
 @onready var bullet_scene : PackedScene = preload("res://bullet.tscn")
-var enemy_targets : Array[Node2D] = []
-var current_target
+var enemy_targets : Array[Enemy] = []
+var current_target : Enemy
+
 func _ready() -> void:
 	$FireTimer.start(fire_rate)
 	health_updated.emit(health, max_health)
+	var r : CircleShape2D = CircleShape2D.new()
+	r.radius = fire_range
+	$FireRange/CollisionShape2D.shape = r
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemy"):
-		health -= 1
+		var enemy : Enemy = body as Enemy
+		if not enemy: return
+		health -= enemy.damage
 		health_updated.emit(health, max_health)
-		print("take damage")
-		body.queue_free()
+		enemy_targets.erase(enemy)
+		current_target = null
+		enemy.queue_free()
 
 func _on_fire_range_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemy"):
-		print("target and shoot at enemy")
+		var enemy : Enemy = body as Enemy
+		if not enemy: return
+		enemy_targets.append(enemy)
 
 func _on_fire_timer_timeout() -> void:
+	if current_target and not current_target.isAlive:
+		enemy_targets.erase(current_target)
+		current_target.queue_free()
+		current_target = null
+		
+	if not current_target:
+		if enemy_targets.is_empty(): return
+		else: current_target = enemy_targets.get(0)
+	
 	var bullet : Bullet = bullet_scene.instantiate()
 	
-	var fake_target : Vector2 = Vector2.ZERO
-	fake_target.x = randi_range(0, 1920)
-	fake_target.y = randi_range(0, 1080)
-	
-	var angle : float = position.angle_to_point(fake_target)
-	var bullet_speed : Vector2 = Vector2(800, 0)
+	var angle : float = position.angle_to_point(current_target.position)
+	var bullet_speed : Vector2 = Vector2(1000, 0)
 	bullet_speed = bullet_speed.rotated(angle)
 	bullet.linear_velocity = bullet_speed
 	bullet.damage = damage

@@ -15,11 +15,11 @@ height = 128
 size = Vector2(128, 128)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4flbx"]
-radius = 400.0
+radius = 800.0
 
 [node name="Player" type="Area2D"]
+collision_mask = 10
 script = ExtResource("1_4flbx")
-fire_rate = 1.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("GradientTexture2D_4flbx")
@@ -28,9 +28,11 @@ texture = SubResource("GradientTexture2D_4flbx")
 shape = SubResource("RectangleShape2D_onrkg")
 
 [node name="FireRange" type="Area2D" parent="."]
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FireRange"]
 shape = SubResource("CircleShape2D_4flbx")
+debug_color = Color(0.9764706, 0, 0.40392157, 0.11764706)
 
 [node name="FireTimer" type="Timer" parent="."]
 

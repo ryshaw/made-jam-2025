@@ -18,17 +18,44 @@ config/features=PackedStringArray("4.5", "Forward Plus")
 
 Global="*res://global.gd"
 
+[debug]
+
+gdscript/warnings/int_as_enum_without_cast=0
+shapes/navigation/3d/geometry_edge_color=Color(0.5019608, 1, 1, 0)
+shapes/navigation/3d/geometry_face_color=Color(0.5019608, 1, 1, 0)
+shapes/navigation/2d/edge_connection_color=Color(1, 0, 1, 0)
+shapes/navigation/2d/geometry_edge_color=Color(0.5019608, 1, 1, 0)
+shapes/navigation/2d/geometry_face_color=Color(0.5019608, 1, 1, 0)
+shapes/navigation/2d/geometry_edge_disabled_color=Color(0.5019608, 0.5019608, 0.5019608, 0)
+shapes/navigation/2d/geometry_face_disabled_color=Color(0.5019608, 0.5019608, 0.5019608, 0)
+shapes/navigation/2d/link_connection_color=Color(1, 0.5019608, 1, 0)
+shapes/navigation/2d/link_connection_disabled_color=Color(0.5019608, 0.5019608, 0.5019608, 0)
+shapes/navigation/2d/agent_path_color=Color(1, 0, 0, 0)
+shapes/navigation/2d/enable_edge_connections=false
+shapes/navigation/2d/enable_edge_lines=false
+shapes/navigation/2d/enable_geometry_face_random_color=false
+shapes/navigation/2d/enable_link_connections=false
+shapes/navigation/2d/enable_agent_paths=false
+
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=2
+window/size/window_width_override=640
+window/size/window_height_override=360
 window/stretch/mode="canvas_items"
 
 [global_group]
 
 enemy=""
 enemybullet=""
+
+[layer_names]
+
+2d_physics/layer_1="player"
+2d_physics/layer_2="enemy"
+2d_physics/layer_3="player_bullets"
+2d_physics/layer_4="enemy_bullets"
 
 [physics]
 

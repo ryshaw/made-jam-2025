@@ -16,6 +16,6 @@ func update_value(current_val : int, max_val : int):
 	update_tween = create_tween()
 	update_tween.set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	
-	update_tween.tween_property(self, "value", progress, 0.8)
+	update_tween.tween_property(self, "value", progress, 0.6)
 	
 	

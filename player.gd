@@ -7,9 +7,11 @@ extends Area2D
 @export var fire_rate : float = 0.2 # test value
 @onready var bullet_scene : PackedScene = preload("res://bullet.tscn")
 var enemy_targets : Array[Node2D] = []
+var current_target
 
 func _ready() -> void:
 	$FireTimer.start(fire_rate)
+
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemy"):

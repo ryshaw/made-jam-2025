@@ -1,19 +1,22 @@
 extends Enemy
 @export var stop_dist: float;
 @export var fire_rate: float;
+var can_fire: bool = false;
 
+func _ready() -> void:
+	$ShootTimer.start(fire_rate)
 
 func _physics_process(delta: float) -> void:
-	
 	var distance = Vector2(target.position - self.position).length();
-	print(distance)
 	if(distance < stop_dist):
 		velocity = Vector2.ZERO;
-		shoot()
+		can_fire = true;
 	else:
 		var dir = Vector2(target.position.x - self.position.x,target.position.y - self.position.y).normalized()
 		velocity = Vector2(dir.x*speed,dir.y*speed)
 	move_and_slide()
 
 func shoot():
+	if(can_fire):
+		print("FIREEEE")
 	pass

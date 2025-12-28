@@ -14,7 +14,7 @@ height = 16
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2b2rl"]
 size = Vector2(16, 16)
 
-[node name="Bullet" type="RigidBody2D"]
+[node name="Bullet" type="RigidBody2D" groups=["enemybullet"]]
 script = ExtResource("1_v7oki")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

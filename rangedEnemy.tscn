@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://dus5mpm1bi24o"]
+
+[ext_resource type="Script" uid="uid://d4nhaxisfpt8h" path="res://rangedEnemy.gd" id="1_2rxc8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lj8m1"]
+
+[node name="RangedEnemy" type="CharacterBody2D" groups=["enemy"]]
+script = ExtResource("1_2rxc8")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_lj8m1")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -10.0
+offset_top = -10.0
+offset_right = 10.0
+offset_bottom = 10.0
+color = Color(0.22352941, 1, 1, 1)
+
+[node name="ShootTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="ShootTimer" to="." method="shoot"]

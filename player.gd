@@ -10,7 +10,6 @@ signal health_updated(new_val : int, max_val : int)
 @onready var bullet_scene : PackedScene = preload("res://bullet.tscn")
 var enemy_targets : Array[Node2D] = []
 var current_target
-
 func _ready() -> void:
 	$FireTimer.start(fire_rate)
 	health_updated.emit(health, max_health)
@@ -37,5 +36,6 @@ func _on_fire_timer_timeout() -> void:
 	var bullet_speed : Vector2 = Vector2(800, 0)
 	bullet_speed = bullet_speed.rotated(angle)
 	bullet.linear_velocity = bullet_speed
+	bullet.damage = damage
 
 	add_child(bullet)

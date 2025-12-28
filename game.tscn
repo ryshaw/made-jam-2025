@@ -1,6 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://lqiau5j52a31"]
+[gd_scene load_steps=8 format=3 uid="uid://lqiau5j52a31"]
 
 [ext_resource type="PackedScene" uid="uid://bnjqb3wv37310" path="res://player.tscn" id="1_80nbo"]
+[ext_resource type="PackedScene" uid="uid://cy1o7ymn3vbf6" path="res://base_button.tscn" id="2_e2o6t"]
+[ext_resource type="PackedScene" uid="uid://dw710ilgm08gg" path="res://base_bar.tscn" id="2_feb5d"]
 
 [sub_resource type="Gradient" id="Gradient_e2o6t"]
 offsets = PackedFloat32Array(0)
@@ -11,6 +13,10 @@ gradient = SubResource("Gradient_e2o6t")
 width = 1920
 height = 1080
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fc0e3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e2o6t"]
+
 [node name="Game" type="Node"]
 
 [node name="Background" type="Sprite2D" parent="."]
@@ -19,3 +25,57 @@ texture = SubResource("GradientTexture2D_feb5d")
 
 [node name="Player" parent="." instance=ExtResource("1_80nbo")]
 position = Vector2(960, 540)
+
+[node name="Display" type="CanvasLayer" parent="."]
+
+[node name="Margins" type="MarginContainer" parent="Display"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Display/Margins"]
+layout_mode = 2
+
+[node name="Bars" type="HBoxContainer" parent="Display/Margins/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="BaseBar" parent="Display/Margins/VBoxContainer/Bars" instance=ExtResource("2_feb5d")]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="Display/Margins/VBoxContainer/Bars"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_fc0e3")
+
+[node name="BaseBar2" parent="Display/Margins/VBoxContainer/Bars" instance=ExtResource("2_feb5d")]
+layout_mode = 2
+
+[node name="MiddleGap" type="HSeparator" parent="Display/Margins/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_e2o6t")
+
+[node name="Upgrades" type="HBoxContainer" parent="Display/Margins/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="BaseButton" parent="Display/Margins/VBoxContainer/Upgrades" instance=ExtResource("2_e2o6t")]
+layout_mode = 2
+
+[node name="BaseButton2" parent="Display/Margins/VBoxContainer/Upgrades" instance=ExtResource("2_e2o6t")]
+layout_mode = 2
+
+[node name="BaseButton3" parent="Display/Margins/VBoxContainer/Upgrades" instance=ExtResource("2_e2o6t")]
+layout_mode = 2
+
+[node name="BaseButton4" parent="Display/Margins/VBoxContainer/Upgrades" instance=ExtResource("2_e2o6t")]
+layout_mode = 2

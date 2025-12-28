@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=3 uid="uid://dw710ilgm08gg"]
+
+[ext_resource type="Script" uid="uid://dj84kyj8cgwpb" path="res://base_bar.gd" id="1_1w311"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tw4o2"]
+bg_color = Color(0, 0, 0, 0.19607843)
+skew = Vector2(0.4, 0)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+expand_margin_left = 8.0
+expand_margin_top = 8.0
+expand_margin_right = 8.0
+expand_margin_bottom = 8.0
+shadow_color = Color(0, 0, 0, 0.19607843)
+shadow_size = 1
+shadow_offset = Vector2(4, 4)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1w311"]
+bg_color = Color(1, 1, 1, 1)
+skew = Vector2(0.4, 0)
+corner_radius_top_left = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="LabelSettings" id="LabelSettings_tw4o2"]
+font_size = 42
+outline_size = 20
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 16
+shadow_color = Color(0, 0, 0, 0.39215687)
+shadow_offset = Vector2(4, 4)
+
+[node name="BaseBar" type="ProgressBar"]
+custom_minimum_size = Vector2(450, 65)
+offset_right = 4.0
+offset_bottom = 27.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 20
+theme_override_font_sizes/font_size = 32
+theme_override_styles/background = SubResource("StyleBoxFlat_tw4o2")
+theme_override_styles/fill = SubResource("StyleBoxFlat_1w311")
+value = 50.0
+script = ExtResource("1_1w311")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 0
+offset_top = 73.0
+offset_right = 127.0
+offset_bottom = 118.0
+text = "BaseBar"
+label_settings = SubResource("LabelSettings_tw4o2")

@@ -1,5 +1,7 @@
 extends Area2D
 
+signal health_updated(new_val : int, max_val : int)
+
 @export var health : int = 10
 @export var max_health : int = 10
 @export var damage : int = 1
@@ -11,11 +13,14 @@ var current_target
 
 func _ready() -> void:
 	$FireTimer.start(fire_rate)
-
+	health_updated.emit(health, max_health)
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemy"):
+		health -= 1
+		health_updated.emit(health, max_health)
 		print("take damage")
+		body.queue_free()
 
 func _on_fire_range_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemy"):

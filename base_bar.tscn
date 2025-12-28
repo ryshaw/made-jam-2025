@@ -26,6 +26,8 @@ shadow_offset = Vector2(4, 4)
 bg_color = Color(1, 1, 1, 1)
 skew = Vector2(0.4, 0)
 corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
 corner_radius_bottom_left = 16
 
 [sub_resource type="LabelSettings" id="LabelSettings_tw4o2"]

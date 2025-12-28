@@ -20,24 +20,9 @@ Global="*res://global.gd"
 
 [display]
 
-window/size/viewport_width=640
-window/size/viewport_height=360
-window/size/window_width_override=1920
-window/size/window_height_override=1080
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/stretch/mode="canvas_items"
-
-[file_customization]
-
-folder_colors={
-"res://assets/": "purple",
-"res://data/": "yellow",
-"res://game/": "green",
-"res://ui/": "blue"
-}
-
-[global_group]
-
-characters="all Hero and Enemy objects in the scene"
 
 [rendering]
 

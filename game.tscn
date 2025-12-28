@@ -1,3 +1,21 @@
-[gd_scene format=3 uid="uid://lqiau5j52a31"]
+[gd_scene load_steps=4 format=3 uid="uid://lqiau5j52a31"]
+
+[ext_resource type="PackedScene" uid="uid://bnjqb3wv37310" path="res://player.tscn" id="1_80nbo"]
+
+[sub_resource type="Gradient" id="Gradient_e2o6t"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1.6364455e-06, 0.43669292, 0.00832662, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_feb5d"]
+gradient = SubResource("Gradient_e2o6t")
+width = 1920
+height = 1080
 
 [node name="Game" type="Node"]
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = SubResource("GradientTexture2D_feb5d")
+
+[node name="Player" parent="." instance=ExtResource("1_80nbo")]
+position = Vector2(960, 540)

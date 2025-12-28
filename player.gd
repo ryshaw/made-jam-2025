@@ -8,7 +8,6 @@ extends Area2D
 @onready var bullet_scene : PackedScene = preload("res://bullet.tscn")
 var enemy_targets : Array[Node2D] = []
 var current_target
-
 func _ready() -> void:
 	$FireTimer.start(fire_rate)
 

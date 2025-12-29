@@ -12,6 +12,7 @@ var health_xp_needed : int
 var damage_xp_needed : int
 var fire_rate_xp_needed : int
 var range_xp_needed : int
+var enemy_time : float = 2.5
 
 # should always be (1920, 1080)
 @onready var window_size : Vector2 = get_viewport().get_visible_rect().size
@@ -32,6 +33,7 @@ func _ready() -> void:
 	$SeasonTimer.start(season_length)
 	seasonChange.emit(current_season)
 	reset_upgrade_buttons()
+	$EnemyTimer.start(enemy_time)
 	while true:
 		if game_over: return
 		await Global.wait(1)
@@ -47,7 +49,6 @@ func _on_player_health_updated(new_val: int, max_val: int) -> void:
 		await Global.wait(0.5)
 		game_over = true
 		
-
 func _on_season_timer_timeout() -> void:
 	if game_over: return
 	if current_season == SEASON.WINTER:
@@ -62,6 +63,9 @@ func _on_season_timer_timeout() -> void:
 	reset_upgrade_buttons()
 	await Global.wait(1)
 	$SeasonTimer.start(season_length)
+	$EnemyTimer.stop()
+	enemy_time += 2
+	$EnemyTimer.start(enemy_time)
 	
 
 func _on_enemy_timer_timeout() -> void:
@@ -74,6 +78,8 @@ func _on_enemy_timer_timeout() -> void:
 	current_enemy.target = $Player
 	current_enemy.give_xp_on_death.connect(_on_give_xp_on_death)
 	add_child(current_enemy)
+	enemy_time *= 0.96
+	$EnemyTimer.start(enemy_time)
 	
 func _on_give_xp_on_death(val : int):
 	if game_over: return

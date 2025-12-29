@@ -64,8 +64,7 @@ script = ExtResource("1_fc0e3")
 [node name="SeasonTimer" type="Timer" parent="."]
 
 [node name="EnemyTimer" type="Timer" parent="."]
-wait_time = 2.0
-autostart = true
+one_shot = true
 
 [node name="Background" type="AnimatedSprite2D" parent="."]
 position = Vector2(960, 540)

@@ -13,6 +13,9 @@ var damage_xp_needed : int
 var fire_rate_xp_needed : int
 var range_xp_needed : int
 var enemy_time : float = 2.5
+var difficulty : int = 0 # 0 is nothing, 1 easy, 2 medium, 3 hard
+var enemy_time_multiplier : float = 0.96
+var enemy_time_adjustment : float = 2.0
 
 # should always be (1920, 1080)
 @onready var window_size : Vector2 = get_viewport().get_visible_rect().size
@@ -24,7 +27,8 @@ var enemy_time : float = 2.5
 		preload("res://big_enemy.tscn")
 	]
 	
-func _ready() -> void:
+func start_game():
+	$Display/StartPopup.hide()
 	_on_enemy_timer_timeout()
 	%SeasonBar.update_value(0, 1)
 	%XPBar.update_value(0, 1)
@@ -64,10 +68,9 @@ func _on_season_timer_timeout() -> void:
 	await Global.wait(1)
 	$SeasonTimer.start(season_length)
 	$EnemyTimer.stop()
-	enemy_time += 2
+	enemy_time += enemy_time_adjustment
 	$EnemyTimer.start(enemy_time)
 	
-
 func _on_enemy_timer_timeout() -> void:
 	if game_over: return
 	var current_enemy : Enemy = enemy_list[current_season].instantiate()
@@ -78,7 +81,8 @@ func _on_enemy_timer_timeout() -> void:
 	current_enemy.target = $Player
 	current_enemy.give_xp_on_death.connect(_on_give_xp_on_death)
 	add_child(current_enemy)
-	enemy_time *= 0.96
+	enemy_time *= enemy_time_multiplier
+	print(enemy_time)
 	$EnemyTimer.start(enemy_time)
 	
 func _on_give_xp_on_death(val : int):
@@ -92,12 +96,19 @@ func _unhandled_input(_event: InputEvent) -> void:
 		get_tree().reload_current_scene()
 		return
 	if Input.is_action_pressed("ui_right") or Input.is_action_pressed("ui_left"):
-		var any_focused = false
-		if %HealthButton.has_focus(): any_focused = true
-		elif %DamageButton.has_focus(): any_focused = true
-		elif %FireRateButton.has_focus(): any_focused = true
-		elif %RangeButton.has_focus(): any_focused = true
-		if not any_focused: %HealthButton.call_deferred("grab_focus")
+		if $Display/StartPopup.visible:
+			var any_focused = false
+			if %EasyButton.has_focus(): any_focused = true
+			elif %MediumButton.has_focus(): any_focused = true
+			elif %HardButton.has_focus(): any_focused = true
+			if not any_focused: %EasyButton.call_deferred("grab_focus")
+		else:
+			var any_focused = false
+			if %HealthButton.has_focus(): any_focused = true
+			elif %DamageButton.has_focus(): any_focused = true
+			elif %FireRateButton.has_focus(): any_focused = true
+			elif %RangeButton.has_focus(): any_focused = true
+			if not any_focused: %HealthButton.call_deferred("grab_focus")
 	
 func reset_upgrade_buttons():
 	health_xp_needed = default_xp_needed
@@ -157,3 +168,22 @@ func update_upgrade_costs(except_for : String):
 	%DamageCost.text = "XP Cost: " + str(damage_xp_needed) + "%"
 	%FireRateCost.text = "XP Cost: " + str(fire_rate_xp_needed) + "%"
 	%RangeCost.text = "XP Cost: " + str(range_xp_needed) + "%"
+
+
+func _on_easy_button_pressed() -> void:
+	enemy_time = 3.0
+	enemy_time_multiplier = 0.98
+	enemy_time_adjustment = 2.0
+	start_game()
+
+func _on_medium_button_pressed() -> void:
+	enemy_time = 2.5
+	enemy_time_multiplier = 0.96
+	enemy_time_adjustment = 2.0
+	start_game()
+
+func _on_hard_button_pressed() -> void:
+	enemy_time = 2.0
+	enemy_time_multiplier = 0.92
+	enemy_time_adjustment = 3.0
+	start_game()

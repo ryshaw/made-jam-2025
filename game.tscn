@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://lqiau5j52a31"]
+[gd_scene load_steps=22 format=3 uid="uid://lqiau5j52a31"]
 
 [ext_resource type="PackedScene" uid="uid://qjg3h4w3liqo" path="res://player.tscn" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://dd2lbi1f60vup" path="res://game.gd" id="1_fc0e3"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://de8ig73n1p2t0" path="res://Autumground.png" id="4_mfdv2"]
 [ext_resource type="PackedScene" uid="uid://4r4urahws6qf" path="res://game_button.tscn" id="5_7jktm"]
 [ext_resource type="Texture2D" uid="uid://bjw5s0u1x5nfs" path="res://winterground.png" id="5_iotsf"]
+[ext_resource type="PackedScene" uid="uid://cy1o7ymn3vbf6" path="res://base_button.tscn" id="10_hve3p"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_lc2xo"]
 animations = [{
@@ -43,7 +44,7 @@ shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(4, 4)
 
 [sub_resource type="LabelSettings" id="LabelSettings_fc0e3"]
-font_size = 128
+font_size = 80
 outline_size = 48
 outline_color = Color(0, 0, 0, 1)
 shadow_size = 16
@@ -51,12 +52,71 @@ shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(12, 12)
 
 [sub_resource type="LabelSettings" id="LabelSettings_7jktm"]
-font_size = 68
+line_spacing = 8.0
+font_size = 48
 outline_size = 32
 outline_color = Color(0, 0, 0, 1)
 shadow_size = 16
 shadow_color = Color(0, 0, 0, 1)
 shadow_offset = Vector2(8, 8)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mfdv2"]
+bg_color = Color(0.3137255, 0.6509804, 0.75686276, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+expand_margin_left = 32.0
+expand_margin_top = 32.0
+expand_margin_right = 32.0
+expand_margin_bottom = 32.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iotsf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hve3p"]
+bg_color = Color(1, 1, 1, 0.23529412)
+border_width_left = 16
+border_width_top = 16
+border_width_right = 16
+border_width_bottom = 16
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iotsf"]
+bg_color = Color(1, 1, 1, 0.23529412)
+border_width_left = 16
+border_width_top = 16
+border_width_right = 16
+border_width_bottom = 16
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lc2xo"]
+bg_color = Color(1, 1, 1, 0.23529412)
+border_width_left = 16
+border_width_top = 16
+border_width_right = 16
+border_width_bottom = 16
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 32
+corner_radius_top_right = 32
+corner_radius_bottom_right = 32
+corner_radius_bottom_left = 32
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
 
 [node name="Game" type="Node"]
 script = ExtResource("1_fc0e3")
@@ -141,6 +201,7 @@ unique_name_in_owner = true
 modulate = Color(0.8759732, 0.48039204, 0.4409903, 1)
 layout_mode = 2
 focus_neighbor_left = NodePath("../../RangeUpgrade/RangeButton")
+focus_previous = NodePath("../../RangeUpgrade/RangeButton")
 text = "Upgrade Health"
 
 [node name="HealthCost" type="Label" parent="Display/Margins/VBoxContainer/Upgrades/HealthUpgrade"]
@@ -193,6 +254,7 @@ unique_name_in_owner = true
 modulate = Color(0.46256936, 0.93937695, 0.38637882, 1)
 layout_mode = 2
 focus_neighbor_right = NodePath("../../HealthUpgrade/HealthButton")
+focus_next = NodePath("../../HealthUpgrade/HealthButton")
 text = "Upgrade Range"
 
 [node name="RangeCost" type="Label" parent="Display/Margins/VBoxContainer/Upgrades/RangeUpgrade"]
@@ -230,6 +292,7 @@ label_settings = SubResource("LabelSettings_7jktm")
 horizontal_alignment = 1
 
 [node name="GameWin" type="CenterContainer" parent="Display"]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -254,6 +317,73 @@ text = "press anything to restart game"
 label_settings = SubResource("LabelSettings_7jktm")
 horizontal_alignment = 1
 
+[node name="StartPopup" type="CenterContainer" parent="Display"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="Display/StartPopup"]
+custom_minimum_size = Vector2(100, 200)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_mfdv2")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Display/StartPopup/PanelContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="Display/StartPopup/PanelContainer/VBoxContainer"]
+layout_mode = 2
+text = "\"to new beginnings\""
+label_settings = SubResource("LabelSettings_fc0e3")
+horizontal_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="Display/StartPopup/PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxEmpty_iotsf")
+
+[node name="Label2" type="Label" parent="Display/StartPopup/PanelContainer/VBoxContainer"]
+custom_minimum_size = Vector2(1500, 0)
+layout_mode = 2
+text = "select and buy upgrades to survive a cycle of seasons as a tree. your upgrades will reset each season!
+
+a game by ryshawgames, jellyfishdev, jnsa, and ian.galvez
+
+choose a difficulty:
+"
+label_settings = SubResource("LabelSettings_7jktm")
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Display/StartPopup/PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 80
+alignment = 1
+
+[node name="EasyButton" parent="Display/StartPopup/PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("10_hve3p")]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_left = NodePath("../HardButton")
+focus_previous = NodePath("../HardButton")
+theme_override_styles/focus = SubResource("StyleBoxFlat_hve3p")
+text = "easy"
+
+[node name="MediumButton" parent="Display/StartPopup/PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("10_hve3p")]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/focus = SubResource("StyleBoxFlat_iotsf")
+text = "medium"
+
+[node name="HardButton" parent="Display/StartPopup/PanelContainer/VBoxContainer/HBoxContainer" instance=ExtResource("10_hve3p")]
+unique_name_in_owner = true
+layout_mode = 2
+focus_neighbor_right = NodePath("../EasyButton")
+focus_next = NodePath("../EasyButton")
+theme_override_styles/focus = SubResource("StyleBoxFlat_lc2xo")
+text = "hard"
+
 [connection signal="seasonChange" from="." to="Background" method="_on_game_season_change"]
 [connection signal="seasonChange" from="." to="Player" method="_on_game_season_change"]
 [connection signal="timeout" from="SeasonTimer" to="." method="_on_season_timer_timeout"]
@@ -263,3 +393,6 @@ horizontal_alignment = 1
 [connection signal="pressed" from="Display/Margins/VBoxContainer/Upgrades/DamageUpgrade/DamageButton" to="." method="_on_damage_button_pressed"]
 [connection signal="pressed" from="Display/Margins/VBoxContainer/Upgrades/FireRateUpgrade/FireRateButton" to="." method="_on_fire_rate_button_pressed"]
 [connection signal="pressed" from="Display/Margins/VBoxContainer/Upgrades/RangeUpgrade/RangeButton" to="." method="_on_range_button_pressed"]
+[connection signal="pressed" from="Display/StartPopup/PanelContainer/VBoxContainer/HBoxContainer/EasyButton" to="." method="_on_easy_button_pressed"]
+[connection signal="pressed" from="Display/StartPopup/PanelContainer/VBoxContainer/HBoxContainer/MediumButton" to="." method="_on_medium_button_pressed"]
+[connection signal="pressed" from="Display/StartPopup/PanelContainer/VBoxContainer/HBoxContainer/HardButton" to="." method="_on_hard_button_pressed"]

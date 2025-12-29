@@ -14,6 +14,7 @@ var fire_rate_xp_needed : int
 var range_xp_needed : int
 var song 
 @export var songs = [load("res://springSong.tscn"),load("res://summerSong.tscn"),load("res://fallSong.tscn")]
+@onready var audio = $AudioStreamPlayer
 var enemy_time : float = 2.5
 
 # should always be (1920, 1080)
@@ -118,6 +119,7 @@ func _on_health_button_pressed() -> void:
 		xp -= health_xp_needed
 		%XPBar.update_value(xp, max_xp)
 		update_upgrade_costs("health")
+		audio.play()
 		$Player.max_health += 5
 		$Player.health += 8
 		$Player.health = clampi($Player.health, 0, $Player.max_health)
@@ -128,6 +130,7 @@ func _on_damage_button_pressed() -> void:
 		xp -= damage_xp_needed
 		%XPBar.update_value(xp, max_xp)
 		update_upgrade_costs("damage")
+		audio.play()
 		$Player.damage += 1
 		
 func _on_fire_rate_button_pressed() -> void:
@@ -135,6 +138,7 @@ func _on_fire_rate_button_pressed() -> void:
 		xp -= fire_rate_xp_needed
 		%XPBar.update_value(xp, max_xp)
 		update_upgrade_costs("fire_rate")
+		audio.play()
 		$Player.fire_rate *= 0.7
 		
 func _on_range_button_pressed() -> void:
@@ -142,6 +146,7 @@ func _on_range_button_pressed() -> void:
 		xp -= range_xp_needed
 		%XPBar.update_value(xp, max_xp)
 		update_upgrade_costs("range")
+		audio.play()
 		$Player.fire_range *= 1.2
 		$Player.queue_redraw()
 

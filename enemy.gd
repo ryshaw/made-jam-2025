@@ -12,9 +12,9 @@ var isAlive : bool = true
 func take_damage(amount : int):
 	apply_central_impulse(-1 * linear_velocity)
 	health -= amount
-
 	if (health <= 0): 
 		isAlive = false
+		hide()
 		give_xp_on_death.emit(2)
 
 func _physics_process(_delta: float) -> void:

@@ -41,6 +41,7 @@ func _on_fire_range_body_entered(body: Node2D) -> void:
 		enemy_targets.append(enemy)
 
 func _on_fire_timer_timeout() -> void:
+	if health <= 0: return
 	if current_target and not current_target.isAlive:
 		enemy_targets.erase(current_target)
 		current_target.queue_free()

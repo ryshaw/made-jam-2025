@@ -20,9 +20,8 @@ var current_target : Enemy
 func _ready() -> void:
 	$FireTimer.start(fire_rate)
 	health_updated.emit(health, max_health)
-	var r : CircleShape2D = CircleShape2D.new()
-	r.radius = fire_range
-	$FireRange/CollisionShape2D.shape = r
+	var shape : CircleShape2D = $FireRange/CollisionShape2D.shape
+	shape.radius = fire_range
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemy"):
@@ -66,6 +65,7 @@ func _on_fire_timer_timeout() -> void:
 	bullet.damage = damage
 	bullet.show_behind_parent = true
 	add_child(bullet)
+	$FireTimer.start(fire_rate)
 
 func _on_game_season_change(season: int) -> void:
 	sprite.frame = season
@@ -79,3 +79,5 @@ func _draw():
 	var c : Color = Color.ROSY_BROWN
 	c.a = 0.4
 	draw_circle(Vector2.ZERO, fire_range, c)
+	var shape : CircleShape2D = $FireRange/CollisionShape2D.shape
+	shape.radius = fire_range

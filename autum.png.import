@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ddps8mutg2f5y"
-path="res://.godot/imported/winter..png-84a57c81daaf8dc7e1a8d868a8c09939.ctex"
+uid="uid://b6b6xkeqrfx3t"
+path="res://.godot/imported/autum.png-96275cf44a549c5de590c216cda77475.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://winter..png"
-dest_files=["res://.godot/imported/winter..png-84a57c81daaf8dc7e1a8d868a8c09939.ctex"]
+source_file="res://autum.png"
+dest_files=["res://.godot/imported/autum.png-96275cf44a549c5de590c216cda77475.ctex"]
 
 [params]
 

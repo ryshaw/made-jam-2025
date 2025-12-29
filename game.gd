@@ -18,9 +18,9 @@ var range_xp_needed : int
 
 @onready var enemy_list : Array[PackedScene] = [
 		preload("res://enemy.tscn"),
+		preload("res://fast_enemy.tscn"),
 		preload("res://rangedEnemy.tscn"),
-		preload("res://enemy.tscn"),
-		preload("res://enemy.tscn")
+		preload("res://big_enemy.tscn")
 	]
 	
 func _ready() -> void:

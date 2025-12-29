@@ -31,7 +31,7 @@ radius = 32.0
 height = 96.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4flbx"]
-radius = 800.0
+radius = 300.0
 
 [node name="Player" type="Area2D"]
 collision_mask = 10

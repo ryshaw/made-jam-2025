@@ -139,8 +139,9 @@ theme_override_constants/separation = 10
 
 [node name="HealthButton" parent="Display/Margins/VBoxContainer/Upgrades/HealthUpgrade" instance=ExtResource("5_7jktm")]
 unique_name_in_owner = true
-modulate = Color(0.86591214, 0.4614539, 0.42285526, 1)
+modulate = Color(0.8759732, 0.48039204, 0.4409903, 1)
 layout_mode = 2
+focus_neighbor_left = NodePath("../../RangeUpgrade/RangeButton")
 text = "Upgrade Health"
 
 [node name="HealthCost" type="Label" parent="Display/Margins/VBoxContainer/Upgrades/HealthUpgrade"]
@@ -156,7 +157,7 @@ theme_override_constants/separation = 10
 
 [node name="DamageButton" parent="Display/Margins/VBoxContainer/Upgrades/DamageUpgrade" instance=ExtResource("5_7jktm")]
 unique_name_in_owner = true
-modulate = Color(0.74285364, 0.66447556, 1.540184e-06, 1)
+modulate = Color(0.899487, 0.6125736, 0, 1)
 layout_mode = 2
 text = "Upgrade Damage"
 
@@ -190,8 +191,9 @@ theme_override_constants/separation = 10
 
 [node name="RangeButton" parent="Display/Margins/VBoxContainer/Upgrades/RangeUpgrade" instance=ExtResource("5_7jktm")]
 unique_name_in_owner = true
-modulate = Color(0.4052964, 0.76290244, 7.70092e-07, 1)
+modulate = Color(0.46256936, 0.93937695, 0.38637882, 1)
 layout_mode = 2
+focus_neighbor_right = NodePath("../../HealthUpgrade/HealthButton")
 text = "Upgrade Range"
 
 [node name="RangeCost" type="Label" parent="Display/Margins/VBoxContainer/Upgrades/RangeUpgrade"]

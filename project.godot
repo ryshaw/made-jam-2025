@@ -41,7 +41,7 @@ shapes/navigation/2d/enable_agent_paths=false
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=2
+window/size/mode=3
 window/stretch/mode="canvas_items"
 
 [global_group]

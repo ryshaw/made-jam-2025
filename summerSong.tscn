@@ -1,0 +1,37 @@
+[gd_scene load_steps=8 format=3 uid="uid://di6nsxyaot85c"]
+
+[ext_resource type="AudioStream" uid="uid://ckv0kbmgjr3f5" path="res://summer-stem-1.wav" id="1_bnwc4"]
+[ext_resource type="AudioStream" uid="uid://cix2mk03dwgkm" path="res://summer-stem-2.wav" id="2_jn4aw"]
+[ext_resource type="AudioStream" uid="uid://5bjtitco2tw4" path="res://summer-stem-3.wav" id="3_2xtnb"]
+[ext_resource type="AudioStream" uid="uid://b5jxpi4a10lw1" path="res://summer-stem-4.wav" id="4_j0sh3"]
+[ext_resource type="AudioStream" uid="uid://b05hgooywhybu" path="res://summer-stem-5.wav" id="5_sp36o"]
+[ext_resource type="Script" uid="uid://bbj8gscai861t" path="res://springAudio.gd" id="6_jn4aw"]
+
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_8m8l6"]
+stream_count = 5
+stream_0/stream = ExtResource("1_bnwc4")
+stream_0/volume = 0.0
+stream_1/stream = ExtResource("4_j0sh3")
+stream_1/volume = -60.0
+stream_2/stream = ExtResource("2_jn4aw")
+stream_2/volume = -60.0
+stream_3/stream = ExtResource("3_2xtnb")
+stream_3/volume = -60.0
+stream_4/stream = ExtResource("5_sp36o")
+stream_4/volume = -60.0
+
+[node name="summerSong" type="AudioStreamPlayer2D"]
+stream = SubResource("AudioStreamSynchronized_8m8l6")
+autoplay = true
+script = ExtResource("6_jn4aw")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 60.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="add_next_stem"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]

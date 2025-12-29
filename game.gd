@@ -12,6 +12,8 @@ var health_xp_needed : int
 var damage_xp_needed : int
 var fire_rate_xp_needed : int
 var range_xp_needed : int
+var song 
+@export var songs = [load("res://springSong.tscn"),load("res://summerSong.tscn"),load("res://fallSong.tscn")]
 var enemy_time : float = 2.5
 var difficulty : int = 0 # 0 is nothing, 1 easy, 2 medium, 3 hard
 var enemy_time_multiplier : float = 0.96
@@ -37,6 +39,7 @@ func start_game():
 	$SeasonTimer.start(season_length)
 	seasonChange.emit(current_season)
 	reset_upgrade_buttons()
+	changeMusic()
 	$EnemyTimer.start(enemy_time)
 	while true:
 		if game_over: return
@@ -64,6 +67,7 @@ func _on_season_timer_timeout() -> void:
 		return
 	current_season = current_season + (1 as SEASON)
 	emit_signal("seasonChange",current_season)
+	changeMusic()
 	reset_upgrade_buttons()
 	await Global.wait(1)
 	$SeasonTimer.start(season_length)
@@ -151,6 +155,10 @@ func _on_range_button_pressed() -> void:
 		update_upgrade_costs("range")
 		$Player.fire_range *= 1.2
 		$Player.queue_redraw()
+
+func changeMusic():
+	song = songs[current_season].instantiate()
+	add_child(song)
 
 func update_upgrade_costs(except_for : String):
 	health_xp_needed += 4

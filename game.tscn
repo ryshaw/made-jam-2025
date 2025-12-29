@@ -120,6 +120,7 @@ expand_margin_right = 4.0
 
 [node name="Game" type="Node"]
 script = ExtResource("1_fc0e3")
+season_length = 60.0
 
 [node name="SeasonTimer" type="Timer" parent="."]
 

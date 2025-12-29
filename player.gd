@@ -10,8 +10,8 @@ var default_range : int = 350
 @export var health : int = 10
 @export var max_health : int = 10
 @export var damage : int = 1
-@export var fire_range : int = 300
-@export var fire_rate : float = 0.5
+@export var fire_range : int = 350
+@export var fire_rate : float = 0.6
 @onready var bullet_scene : PackedScene = preload("res://bullet.tscn")
 var enemy_targets : Array[Enemy] = []
 @onready var sprite = $Sprite2D
@@ -60,11 +60,11 @@ func _on_fire_timer_timeout() -> void:
 	var bullet : Bullet = bullet_scene.instantiate()
 	
 	var angle : float = position.angle_to_point(current_target.position)
-	var bullet_speed : Vector2 = Vector2(1000, 0)
+	var bullet_speed : Vector2 = Vector2(500, 0)
 	bullet_speed = bullet_speed.rotated(angle)
 	bullet.linear_velocity = bullet_speed
 	bullet.damage = damage
-
+	bullet.show_behind_parent = true
 	add_child(bullet)
 
 func _on_game_season_change(season: int) -> void:
@@ -74,3 +74,8 @@ func _on_game_season_change(season: int) -> void:
 	damage = default_damage
 	fire_rate = default_fire_rate
 	fire_range = default_range
+
+func _draw():
+	var c : Color = Color.ROSY_BROWN
+	c.a = 0.4
+	draw_circle(Vector2.ZERO, fire_range, c)

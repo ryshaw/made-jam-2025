@@ -9,7 +9,10 @@ signal health_updated(new_val : int, max_val : int)
 @export var fire_rate : float = 0.5
 @onready var bullet_scene : PackedScene = preload("res://bullet.tscn")
 var enemy_targets : Array[Enemy] = []
+@onready var sprite = $Sprite2D
 var current_target : Enemy
+
+	
 
 func _ready() -> void:
 	$FireTimer.start(fire_rate)
@@ -59,3 +62,10 @@ func _on_fire_timer_timeout() -> void:
 	bullet.damage = damage
 
 	add_child(bullet)
+
+
+
+
+func _on_game_season_change(season: int) -> void:
+	print("Attempt change")
+	sprite.frame = season

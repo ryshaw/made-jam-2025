@@ -35,6 +35,11 @@ texture = SubResource("GradientTexture2D_feb5d")
 
 [node name="Player" parent="." instance=ExtResource("1_80nbo")]
 position = Vector2(960, 540)
+health = null
+max_health = null
+damage = null
+fire_range = null
+fire_rate = null
 
 [node name="Display" type="CanvasLayer" parent="."]
 
@@ -106,7 +111,6 @@ layout_mode = 2
 [node name="BaseButton4" parent="Display/Margins/VBoxContainer/Upgrades" instance=ExtResource("2_e2o6t")]
 layout_mode = 2
 
-[connection signal="seasonChange" from="." to="Player" method="_on_game_season_change"]
 [connection signal="timeout" from="SeasonTimer" to="." method="_on_season_timer_timeout"]
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
 [connection signal="health_updated" from="Player" to="." method="_on_player_health_updated"]

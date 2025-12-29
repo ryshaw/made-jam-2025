@@ -2,9 +2,11 @@ extends Node
 
 enum SEASON { SPRING, SUMMER, FALL, WINTER }
 
-var current_season : SEASON = SEASON.SUMMER
 var xp : int = 0
 var max_xp : int = 100
+signal seasonChange(season:SEASON)
+var current_season : SEASON = SEASON.SPRING
+
 
 # should always be (1920, 1080)
 @onready var window_size : Vector2 = get_viewport().get_visible_rect().size
@@ -31,12 +33,13 @@ func _on_player_health_updated(new_val: int, max_val: int) -> void:
 		print("game over")
 
 func _on_season_timer_timeout() -> void:
+	
 	if current_season == SEASON.WINTER:
 		print("game win")
 		return
 	current_season = current_season + (1 as SEASON)
 	print("next season")
-
+	emit_signal("seasonChange",current_season)
 func _on_enemy_timer_timeout() -> void:
 	var current_enemy : Enemy = enemy_list[current_season].instantiate()
 	var x : float = 0.0 if randf() < 0.5 else window_size.x

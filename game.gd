@@ -1,7 +1,6 @@
 extends Node
 
 enum SEASON { SPRING, SUMMER, FALL, WINTER }
-
 var xp : int = 0
 var max_xp : int = 100
 signal seasonChange(season:SEASON)
@@ -33,7 +32,11 @@ func _on_player_health_updated(new_val: int, max_val: int) -> void:
 		print("game over")
 
 func _on_season_timer_timeout() -> void:
+<<<<<<< Updated upstream
 	
+=======
+	emit_signal("seasonChange",current_season)
+>>>>>>> Stashed changes
 	if current_season == SEASON.WINTER:
 		print("game win")
 		return

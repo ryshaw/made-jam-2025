@@ -1,6 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://cy1o7ymn3vbf6"]
+[gd_scene load_steps=6 format=3 uid="uid://4r4urahws6qf"]
 
-[ext_resource type="Script" uid="uid://ct1gjrbdkf4j5" path="res://game_button.gd" id="1_k1upb"]
+[ext_resource type="Script" uid="uid://ct1gjrbdkf4j5" path="res://game_button.gd" id="1_l7edf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iubun"]
 bg_color = Color(0, 0, 0, 1)
@@ -50,14 +50,14 @@ shadow_offset = Vector2(2, 2)
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iubun"]
 
 [node name="GameButton" type="Button"]
-custom_minimum_size = Vector2(320, 120)
+custom_minimum_size = Vector2(400, 120)
 offset_right = 320.0
 offset_bottom = 120.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_font_sizes/font_size = 48
+theme_override_font_sizes/font_size = 40
 theme_override_styles/normal = SubResource("StyleBoxFlat_iubun")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_k1upb")
 theme_override_styles/hover = SubResource("StyleBoxFlat_hmms1")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_iubun")
-text = "BaseButton"
-script = ExtResource("1_k1upb")
+text = "GameButton"
+script = ExtResource("1_l7edf")

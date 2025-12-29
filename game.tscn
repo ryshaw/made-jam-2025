@@ -1,10 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://lqiau5j52a31"]
+[gd_scene load_steps=13 format=3 uid="uid://lqiau5j52a31"]
 
 [ext_resource type="PackedScene" uid="uid://qjg3h4w3liqo" path="res://player.tscn" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://dd2lbi1f60vup" path="res://game.gd" id="1_fc0e3"]
-[ext_resource type="Script" uid="uid://coqisclamvyny" path="res://background.gd" id="2_7jktm"]
-[ext_resource type="PackedScene" uid="uid://cy1o7ymn3vbf6" path="res://base_button.tscn" id="2_e2o6t"]
+[ext_resource type="Script" path="res://background.gd" id="2_7jktm"]
 [ext_resource type="PackedScene" uid="uid://dw710ilgm08gg" path="res://base_bar.tscn" id="2_feb5d"]
+[ext_resource type="PackedScene" uid="uid://4r4urahws6qf" path="res://game_button.tscn" id="5_7jktm"]
 
 [sub_resource type="Gradient" id="Gradient_e2o6t"]
 offsets = PackedFloat32Array(0)
@@ -18,6 +18,14 @@ height = 1080
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fc0e3"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e2o6t"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ryrav"]
+font_size = 32
+outline_size = 20
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 16
+shadow_color = Color(0, 0, 0, 1)
+shadow_offset = Vector2(4, 4)
 
 [sub_resource type="LabelSettings" id="LabelSettings_fc0e3"]
 font_size = 128
@@ -107,20 +115,68 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_e2o6t")
 [node name="Upgrades" type="HBoxContainer" parent="Display/Margins/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_constants/separation = 100
+theme_override_constants/separation = 40
 alignment = 1
 
-[node name="BaseButton" parent="Display/Margins/VBoxContainer/Upgrades" instance=ExtResource("2_e2o6t")]
+[node name="HealthUpgrade" type="VBoxContainer" parent="Display/Margins/VBoxContainer/Upgrades"]
 layout_mode = 2
+theme_override_constants/separation = 10
 
-[node name="BaseButton2" parent="Display/Margins/VBoxContainer/Upgrades" instance=ExtResource("2_e2o6t")]
+[node name="HealthButton" parent="Display/Margins/VBoxContainer/Upgrades/HealthUpgrade" instance=ExtResource("5_7jktm")]
+modulate = Color(0.86591214, 0.4614539, 0.42285526, 1)
 layout_mode = 2
+text = "Upgrade Health"
 
-[node name="BaseButton3" parent="Display/Margins/VBoxContainer/Upgrades" instance=ExtResource("2_e2o6t")]
+[node name="Cost" type="Label" parent="Display/Margins/VBoxContainer/Upgrades/HealthUpgrade"]
 layout_mode = 2
+text = "Upgrade Cost: 10%"
+label_settings = SubResource("LabelSettings_ryrav")
+horizontal_alignment = 1
 
-[node name="BaseButton4" parent="Display/Margins/VBoxContainer/Upgrades" instance=ExtResource("2_e2o6t")]
+[node name="DamageUpgrade" type="VBoxContainer" parent="Display/Margins/VBoxContainer/Upgrades"]
 layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="DamageButton" parent="Display/Margins/VBoxContainer/Upgrades/DamageUpgrade" instance=ExtResource("5_7jktm")]
+modulate = Color(0.74285364, 0.66447556, 1.540184e-06, 1)
+layout_mode = 2
+text = "Upgrade Damage"
+
+[node name="Cost" type="Label" parent="Display/Margins/VBoxContainer/Upgrades/DamageUpgrade"]
+layout_mode = 2
+text = "Upgrade Cost: 10%"
+label_settings = SubResource("LabelSettings_ryrav")
+horizontal_alignment = 1
+
+[node name="FireRateUpgrade" type="VBoxContainer" parent="Display/Margins/VBoxContainer/Upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="FireRateButton" parent="Display/Margins/VBoxContainer/Upgrades/FireRateUpgrade" instance=ExtResource("5_7jktm")]
+modulate = Color(0.22129604, 0.69358057, 0.9999998, 1)
+layout_mode = 2
+text = "Upgrade Fire Rate"
+
+[node name="Cost" type="Label" parent="Display/Margins/VBoxContainer/Upgrades/FireRateUpgrade"]
+layout_mode = 2
+text = "Upgrade Cost: 10%"
+label_settings = SubResource("LabelSettings_ryrav")
+horizontal_alignment = 1
+
+[node name="RangeUpgrade" type="VBoxContainer" parent="Display/Margins/VBoxContainer/Upgrades"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="RangeButton" parent="Display/Margins/VBoxContainer/Upgrades/RangeUpgrade" instance=ExtResource("5_7jktm")]
+modulate = Color(0.4052964, 0.76290244, 7.70092e-07, 1)
+layout_mode = 2
+text = "Upgrade Range"
+
+[node name="Cost" type="Label" parent="Display/Margins/VBoxContainer/Upgrades/RangeUpgrade"]
+layout_mode = 2
+text = "Upgrade Cost: 10%"
+label_settings = SubResource("LabelSettings_ryrav")
+horizontal_alignment = 1
 
 [node name="Label" type="Label" parent="Display"]
 offset_right = 40.0

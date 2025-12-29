@@ -6,7 +6,7 @@ signal give_xp_on_death(val : int)
 @export var health: int = 3
 @export var damage: int = 1
 @export var target: Node2D
-@export var xp_on_death : int = 2
+@export var xp_on_death : int = 5
 var isAlive : bool = true
 
 func take_damage(amount : int):

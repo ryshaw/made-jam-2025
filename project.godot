@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="MADE Jam 2025"
+config/name="to new beginnings"
 run/main_scene="uid://lqiau5j52a31"
 config/features=PackedStringArray("4.5", "Forward Plus")
 

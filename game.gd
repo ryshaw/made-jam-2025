@@ -194,7 +194,7 @@ func _on_easy_button_pressed() -> void:
 func _on_medium_button_pressed() -> void:
 	enemy_time = 2.8
 	enemy_time_multiplier = 0.98
-	enemy_time_adjustment = 0.8
+	enemy_time_adjustment = 0.9
 	start_game()
 
 func _on_hard_button_pressed() -> void:

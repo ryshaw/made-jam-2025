@@ -10,7 +10,7 @@ var default_range : int = 350
 @export var health : int = 10
 @export var max_health : int = 10
 @export var damage : int = 1
-@export var fire_range : int = 350
+@export var fire_range : int = 150
 @export var fire_rate : float = 0.6
 @onready var bullet_scene : PackedScene = preload("res://bullet.tscn")
 var enemy_targets : Array[Enemy] = []
@@ -31,6 +31,7 @@ func _on_body_entered(body: Node2D) -> void:
 			health_updated.emit(health, max_health)
 			enemy_targets.erase(enemy)
 			current_target = null
+			enemy.isAlive = false
 			enemy.queue_free()
 		else:
 			var enemy_bullet : EnemyBullet = body as EnemyBullet
@@ -54,7 +55,12 @@ func _on_fire_timer_timeout() -> void:
 		
 	if not current_target:
 		if enemy_targets.is_empty(): return
-		else: current_target = enemy_targets.get(0)
+		else:
+			if is_instance_valid(enemy_targets.get(0)):
+				current_target = enemy_targets.get(0)
+			else: 
+				enemy_targets.remove_at(0)
+				return
 	
 	var bullet : Bullet = bullet_scene.instantiate()
 	
@@ -74,6 +80,9 @@ func _on_game_season_change(season: int) -> void:
 	damage = default_damage
 	fire_rate = default_fire_rate
 	fire_range = default_range
+	queue_redraw()
+	var shape : CircleShape2D = $FireRange/CollisionShape2D.shape
+	shape.radius = fire_range
 
 func _draw():
 	var c : Color = Color.ROSY_BROWN

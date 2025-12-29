@@ -6,7 +6,7 @@ var current_season : SEASON = SEASON.SPRING
 var xp : int = 0
 var max_xp : int = 100
 var game_over : bool = false
-@export var season_length: float = 30
+@export var season_length: float = 40
 var default_xp_needed : int = 4
 var health_xp_needed : int
 var damage_xp_needed : int
@@ -14,6 +14,7 @@ var fire_rate_xp_needed : int
 var range_xp_needed : int
 var song 
 @export var songs = [load("res://springSong.tscn"),load("res://summerSong.tscn"),load("res://fallSong.tscn")]
+var enemy_time : float = 2.5
 
 # should always be (1920, 1080)
 @onready var window_size : Vector2 = get_viewport().get_visible_rect().size
@@ -35,6 +36,7 @@ func _ready() -> void:
 	seasonChange.emit(current_season)
 	reset_upgrade_buttons()
 	changeMusic()
+	$EnemyTimer.start(enemy_time)
 	while true:
 		if game_over: return
 		await Global.wait(1)
@@ -50,7 +52,6 @@ func _on_player_health_updated(new_val: int, max_val: int) -> void:
 		await Global.wait(0.5)
 		game_over = true
 		
-
 func _on_season_timer_timeout() -> void:
 	if game_over: return
 	if current_season == SEASON.WINTER:
@@ -66,6 +67,9 @@ func _on_season_timer_timeout() -> void:
 	reset_upgrade_buttons()
 	await Global.wait(1)
 	$SeasonTimer.start(season_length)
+	$EnemyTimer.stop()
+	enemy_time += 2
+	$EnemyTimer.start(enemy_time)
 	
 
 func _on_enemy_timer_timeout() -> void:
@@ -78,25 +82,36 @@ func _on_enemy_timer_timeout() -> void:
 	current_enemy.target = $Player
 	current_enemy.give_xp_on_death.connect(_on_give_xp_on_death)
 	add_child(current_enemy)
+	enemy_time *= 0.96
+	$EnemyTimer.start(enemy_time)
 	
 func _on_give_xp_on_death(val : int):
 	if game_over: return
 	xp += val
+	xp = clampi(xp, 0, max_xp)
 	%XPBar.update_value(xp, max_xp)
 
 func _unhandled_input(_event: InputEvent) -> void:
 	if game_over and Input.is_anything_pressed():
 		get_tree().reload_current_scene()
-
+		return
+	if Input.is_action_pressed("ui_right") or Input.is_action_pressed("ui_left"):
+		var any_focused = false
+		if %HealthButton.has_focus(): any_focused = true
+		elif %DamageButton.has_focus(): any_focused = true
+		elif %FireRateButton.has_focus(): any_focused = true
+		elif %RangeButton.has_focus(): any_focused = true
+		if not any_focused: %HealthButton.call_deferred("grab_focus")
+	
 func reset_upgrade_buttons():
 	health_xp_needed = default_xp_needed
 	damage_xp_needed = default_xp_needed
 	fire_rate_xp_needed = default_xp_needed
 	range_xp_needed = default_xp_needed
-	%HealthCost.text = "Upgrade Cost: " + str(health_xp_needed) + "%"
-	%DamageCost.text = "Upgrade Cost: " + str(damage_xp_needed) + "%"
-	%FireRateCost.text = "Upgrade Cost: " + str(fire_rate_xp_needed) + "%"
-	%RangeCost.text = "Upgrade Cost: " + str(range_xp_needed) + "%"
+	%HealthCost.text = "XP Cost: " + str(health_xp_needed) + "%"
+	%DamageCost.text = "XP Cost: " + str(damage_xp_needed) + "%"
+	%FireRateCost.text = "XP Cost: " + str(fire_rate_xp_needed) + "%"
+	%RangeCost.text = "XP Cost: " + str(range_xp_needed) + "%"
 
 func _on_health_button_pressed() -> void:
 	if xp >= health_xp_needed:
@@ -121,7 +136,6 @@ func _on_fire_rate_button_pressed() -> void:
 		%XPBar.update_value(xp, max_xp)
 		update_upgrade_costs("fire_rate")
 		$Player.fire_rate *= 0.7
-		print($Player.fire_rate)
 		
 func _on_range_button_pressed() -> void:
 	if xp >= range_xp_needed:
@@ -129,7 +143,7 @@ func _on_range_button_pressed() -> void:
 		%XPBar.update_value(xp, max_xp)
 		update_upgrade_costs("range")
 		$Player.fire_range *= 1.2
-		print($Player.fire_range)
+		$Player.queue_redraw()
 
 func changeMusic():
 	song = songs[current_season].instantiate()
@@ -147,7 +161,7 @@ func update_upgrade_costs(except_for : String):
 		"fire_rate": fire_rate_xp_needed -= 2
 		"range": range_xp_needed -= 2
 		
-	%HealthCost.text = "Upgrade Cost: " + str(health_xp_needed) + "%"
-	%DamageCost.text = "Upgrade Cost: " + str(damage_xp_needed) + "%"
-	%FireRateCost.text = "Upgrade Cost: " + str(fire_rate_xp_needed) + "%"
-	%RangeCost.text = "Upgrade Cost: " + str(range_xp_needed) + "%"
+	%HealthCost.text = "XP Cost: " + str(health_xp_needed) + "%"
+	%DamageCost.text = "XP Cost: " + str(damage_xp_needed) + "%"
+	%FireRateCost.text = "XP Cost: " + str(fire_rate_xp_needed) + "%"
+	%RangeCost.text = "XP Cost: " + str(range_xp_needed) + "%"

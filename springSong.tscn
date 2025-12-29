@@ -1,0 +1,37 @@
+[gd_scene load_steps=8 format=3 uid="uid://cfa5wrt0pi4x7"]
+
+[ext_resource type="AudioStream" uid="uid://dmkgaxbm8nlu5" path="res://spring-stem-1.wav" id="1_ed2b3"]
+[ext_resource type="AudioStream" uid="uid://brlba5nrfgoc5" path="res://spring-stem-4.wav" id="2_htkna"]
+[ext_resource type="AudioStream" uid="uid://cqgx7g3sqo6ys" path="res://spring-stem-2.wav" id="3_pou8h"]
+[ext_resource type="AudioStream" uid="uid://dyyp51xb0elr4" path="res://spring-stem-3.wav" id="4_p4u6o"]
+[ext_resource type="AudioStream" uid="uid://blv7v2oow3os0" path="res://spring-stem-5.wav" id="5_gls8o"]
+[ext_resource type="Script" uid="uid://bbj8gscai861t" path="res://springAudio.gd" id="6_qxnah"]
+
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_ly5cn"]
+stream_count = 5
+stream_0/stream = ExtResource("1_ed2b3")
+stream_0/volume = 0.0
+stream_1/stream = ExtResource("2_htkna")
+stream_1/volume = -60.0
+stream_2/stream = ExtResource("3_pou8h")
+stream_2/volume = -60.0
+stream_3/stream = ExtResource("4_p4u6o")
+stream_3/volume = -60.0
+stream_4/stream = ExtResource("5_gls8o")
+stream_4/volume = -60.0
+
+[node name="spring" type="AudioStreamPlayer2D"]
+stream = SubResource("AudioStreamSynchronized_ly5cn")
+autoplay = true
+script = ExtResource("6_qxnah")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 60.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="add_next_stem"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]

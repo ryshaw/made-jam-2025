@@ -157,8 +157,10 @@ func _on_range_button_pressed() -> void:
 		$Player.queue_redraw()
 
 func changeMusic():
-	song = songs[current_season].instantiate()
-	add_child(song)
+	var current = current_season
+	if (current < 3):
+		song = songs[current_season].instantiate()
+		add_child(song)
 
 func update_upgrade_costs(except_for : String):
 	health_xp_needed += 4

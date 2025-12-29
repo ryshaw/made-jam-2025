@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://dd2lbi1f60vup" path="res://game.gd" id="1_fc0e3"]
 [ext_resource type="Script" uid="uid://coqisclamvyny" path="res://background.gd" id="2_7jktm"]
 [ext_resource type="PackedScene" uid="uid://dw710ilgm08gg" path="res://base_bar.tscn" id="2_feb5d"]
-[ext_resource type="PackedScene" path="res://game_button.tscn" id="5_7jktm"]
+[ext_resource type="PackedScene" uid="uid://4r4urahws6qf" path="res://game_button.tscn" id="5_7jktm"]
 
 [sub_resource type="Gradient" id="Gradient_e2o6t"]
 offsets = PackedFloat32Array(0)
@@ -243,3 +243,6 @@ horizontal_alignment = 1
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
 [connection signal="health_updated" from="Player" to="." method="_on_player_health_updated"]
 [connection signal="pressed" from="Display/Margins/VBoxContainer/Upgrades/HealthUpgrade/HealthButton" to="." method="_on_health_button_pressed"]
+[connection signal="pressed" from="Display/Margins/VBoxContainer/Upgrades/DamageUpgrade/DamageButton" to="." method="_on_damage_button_pressed"]
+[connection signal="pressed" from="Display/Margins/VBoxContainer/Upgrades/FireRateUpgrade/FireRateButton" to="." method="_on_fire_rate_button_pressed"]
+[connection signal="pressed" from="Display/Margins/VBoxContainer/Upgrades/RangeUpgrade/RangeButton" to="." method="_on_range_button_pressed"]

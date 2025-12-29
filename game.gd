@@ -59,6 +59,7 @@ func _on_season_timer_timeout() -> void:
 		return
 	current_season = current_season + (1 as SEASON)
 	emit_signal("seasonChange",current_season)
+	reset_upgrade_buttons()
 	await Global.wait(1)
 	$SeasonTimer.start(season_length)
 	
@@ -97,6 +98,25 @@ func _on_health_button_pressed() -> void:
 	if xp >= health_xp_needed:
 		xp -= health_xp_needed
 		%XPBar.update_value(xp, max_xp)
+		update_upgrade_costs("health")
+		
+func _on_damage_button_pressed() -> void:
+	if xp >= damage_xp_needed:
+		xp -= damage_xp_needed
+		%XPBar.update_value(xp, max_xp)
+		update_upgrade_costs("damage")
+		
+func _on_fire_rate_button_pressed() -> void:
+	if xp >= fire_rate_xp_needed:
+		xp -= fire_rate_xp_needed
+		%XPBar.update_value(xp, max_xp)
+		update_upgrade_costs("fire_rate")
+		
+func _on_range_button_pressed() -> void:
+	if xp >= range_xp_needed:
+		xp -= range_xp_needed
+		%XPBar.update_value(xp, max_xp)
+		update_upgrade_costs("range")
 
 func update_upgrade_costs(except_for : String):
 	health_xp_needed += 4

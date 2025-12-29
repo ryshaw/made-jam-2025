@@ -1,19 +1,34 @@
-[gd_scene load_steps=13 format=3 uid="uid://lqiau5j52a31"]
+[gd_scene load_steps=16 format=3 uid="uid://lqiau5j52a31"]
 
 [ext_resource type="PackedScene" uid="uid://qjg3h4w3liqo" path="res://player.tscn" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://dd2lbi1f60vup" path="res://game.gd" id="1_fc0e3"]
 [ext_resource type="Script" uid="uid://coqisclamvyny" path="res://background.gd" id="2_7jktm"]
 [ext_resource type="PackedScene" uid="uid://dw710ilgm08gg" path="res://base_bar.tscn" id="2_feb5d"]
+[ext_resource type="Texture2D" uid="uid://dqyat2gimuc6y" path="res://springground.png" id="2_vef74"]
+[ext_resource type="Texture2D" uid="uid://yhwwqjdy8dn5" path="res://summerground.png" id="3_hve3p"]
+[ext_resource type="Texture2D" uid="uid://de8ig73n1p2t0" path="res://Autumground.png" id="4_mfdv2"]
 [ext_resource type="PackedScene" uid="uid://4r4urahws6qf" path="res://game_button.tscn" id="5_7jktm"]
+[ext_resource type="Texture2D" uid="uid://bjw5s0u1x5nfs" path="res://winterground.png" id="5_iotsf"]
 
-[sub_resource type="Gradient" id="Gradient_e2o6t"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(1.6364455e-06, 0.43669292, 0.00832662, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_feb5d"]
-gradient = SubResource("Gradient_e2o6t")
-width = 1920
-height = 1080
+[sub_resource type="SpriteFrames" id="SpriteFrames_lc2xo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_vef74")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_hve3p")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_mfdv2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_iotsf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fc0e3"]
 
@@ -52,9 +67,9 @@ script = ExtResource("1_fc0e3")
 wait_time = 5.0
 autostart = true
 
-[node name="Background" type="Sprite2D" parent="."]
+[node name="Background" type="AnimatedSprite2D" parent="."]
 position = Vector2(960, 540)
-texture = SubResource("GradientTexture2D_feb5d")
+sprite_frames = SubResource("SpriteFrames_lc2xo")
 script = ExtResource("2_7jktm")
 
 [node name="Player" parent="." instance=ExtResource("1_80nbo")]
@@ -239,6 +254,7 @@ label_settings = SubResource("LabelSettings_7jktm")
 horizontal_alignment = 1
 
 [connection signal="seasonChange" from="." to="Player" method="_on_game_season_change"]
+[connection signal="seasonChange" from="." to="Background" method="_on_game_season_change"]
 [connection signal="timeout" from="SeasonTimer" to="." method="_on_season_timer_timeout"]
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
 [connection signal="health_updated" from="Player" to="." method="_on_player_health_updated"]

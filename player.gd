@@ -60,11 +60,11 @@ func _on_fire_timer_timeout() -> void:
 	var bullet : Bullet = bullet_scene.instantiate()
 	
 	var angle : float = position.angle_to_point(current_target.position)
-	var bullet_speed : Vector2 = Vector2(1000, 0)
+	var bullet_speed : Vector2 = Vector2(500, 0)
 	bullet_speed = bullet_speed.rotated(angle)
 	bullet.linear_velocity = bullet_speed
 	bullet.damage = damage
-
+	bullet.show_behind_parent = true
 	add_child(bullet)
 
 func _on_game_season_change(season: int) -> void:

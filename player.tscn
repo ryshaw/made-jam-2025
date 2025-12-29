@@ -26,8 +26,9 @@ animations = [{
 "speed": 1.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_onrkg"]
-size = Vector2(128, 128)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sweqy"]
+radius = 32.0
+height = 96.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4flbx"]
 radius = 800.0
@@ -42,7 +43,7 @@ sprite_frames = SubResource("SpriteFrames_b26j0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 scale = Vector2(2, 2)
-shape = SubResource("RectangleShape2D_onrkg")
+shape = SubResource("CapsuleShape2D_sweqy")
 
 [node name="FireRange" type="Area2D" parent="."]
 collision_mask = 2

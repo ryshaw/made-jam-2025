@@ -15,7 +15,7 @@ func take_damage(amount : int):
 	if (health <= 0): 
 		isAlive = false
 		hide()
-		give_xp_on_death.emit(2)
+		give_xp_on_death.emit(xp_on_death)
 
 func _physics_process(_delta: float) -> void:
 	var dir = Vector2(target.position.x - self.position.x,target.position.y - self.position.y).normalized()

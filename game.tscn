@@ -1,13 +1,13 @@
 [gd_scene load_steps=22 format=3 uid="uid://lqiau5j52a31"]
 
-[ext_resource type="PackedScene" uid="uid://qjg3h4w3liqo" path="res://player.tscn" id="1_80nbo"]
+[ext_resource type="PackedScene" uid="uid://bnjqb3wv37310" path="res://player.tscn" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://dd2lbi1f60vup" path="res://game.gd" id="1_fc0e3"]
-[ext_resource type="Script" uid="uid://coqisclamvyny" path="res://background.gd" id="2_7jktm"]
-[ext_resource type="PackedScene" uid="uid://dw710ilgm08gg" path="res://base_bar.tscn" id="2_feb5d"]
+[ext_resource type="Script" path="res://background.gd" id="2_7jktm"]
+[ext_resource type="PackedScene" path="res://base_bar.tscn" id="2_feb5d"]
 [ext_resource type="Texture2D" uid="uid://dqyat2gimuc6y" path="res://springground.png" id="2_vef74"]
 [ext_resource type="Texture2D" uid="uid://yhwwqjdy8dn5" path="res://summerground.png" id="3_hve3p"]
 [ext_resource type="Texture2D" uid="uid://de8ig73n1p2t0" path="res://Autumground.png" id="4_mfdv2"]
-[ext_resource type="PackedScene" uid="uid://4r4urahws6qf" path="res://game_button.tscn" id="5_7jktm"]
+[ext_resource type="PackedScene" path="res://game_button.tscn" id="5_7jktm"]
 [ext_resource type="Texture2D" uid="uid://bjw5s0u1x5nfs" path="res://winterground.png" id="5_iotsf"]
 [ext_resource type="PackedScene" uid="uid://cy1o7ymn3vbf6" path="res://base_button.tscn" id="10_hve3p"]
 
@@ -318,6 +318,8 @@ text = "press anything to restart game"
 label_settings = SubResource("LabelSettings_7jktm")
 horizontal_alignment = 1
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_hve3p")
 [node name="StartPopup" type="CenterContainer" parent="Display"]
 anchors_preset = 15
 anchor_right = 1.0

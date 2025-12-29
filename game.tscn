@@ -2,9 +2,9 @@
 
 [ext_resource type="PackedScene" uid="uid://qjg3h4w3liqo" path="res://player.tscn" id="1_80nbo"]
 [ext_resource type="Script" uid="uid://dd2lbi1f60vup" path="res://game.gd" id="1_fc0e3"]
-[ext_resource type="Script" path="res://background.gd" id="2_7jktm"]
+[ext_resource type="Script" uid="uid://coqisclamvyny" path="res://background.gd" id="2_7jktm"]
 [ext_resource type="PackedScene" uid="uid://dw710ilgm08gg" path="res://base_bar.tscn" id="2_feb5d"]
-[ext_resource type="PackedScene" uid="uid://4r4urahws6qf" path="res://game_button.tscn" id="5_7jktm"]
+[ext_resource type="PackedScene" path="res://game_button.tscn" id="5_7jktm"]
 
 [sub_resource type="Gradient" id="Gradient_e2o6t"]
 offsets = PackedFloat32Array(0)

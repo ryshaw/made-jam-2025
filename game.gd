@@ -6,6 +6,7 @@ var current_season : SEASON = SEASON.SPRING
 var xp : int = 0
 var max_xp : int = 100
 var game_over : bool = false
+@export var season_length: float = 30
 
 # should always be (1920, 1080)
 @onready var window_size : Vector2 = get_viewport().get_visible_rect().size
@@ -23,7 +24,7 @@ func _ready() -> void:
 	%XPBar.update_value(0, 1)
 	$Display/GameOver.hide()
 	$Display/GameWin.hide()
-	$SeasonTimer.start(5)
+	$SeasonTimer.start(season_length)
 	while true:
 		if game_over: return
 		await Global.wait(1)
@@ -54,7 +55,7 @@ func _on_season_timer_timeout() -> void:
 	emit_signal("seasonChange",current_season)
 	print("next season")
 	await Global.wait(1)
-	$SeasonTimer.start(5)
+	$SeasonTimer.start(season_length)
 	
 
 func _on_enemy_timer_timeout() -> void:

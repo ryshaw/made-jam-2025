@@ -1,15 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://deqojvvc1dy3r"]
+[gd_scene load_steps=4 format=3 uid="uid://deqojvvc1dy3r"]
 
 [ext_resource type="Script" uid="uid://c1xx8c0q51obm" path="res://bullet.gd" id="1_v7oki"]
-
-[sub_resource type="Gradient" id="Gradient_v7oki"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0.3553848, 0.001226564, 0.83332, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_t4vbm"]
-gradient = SubResource("Gradient_v7oki")
-width = 16
-height = 16
+[ext_resource type="Texture2D" uid="uid://bqv8wun86ppnj" path="res://Bullet.png" id="2_v8qja"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2b2rl"]
 size = Vector2(16, 16)
@@ -22,7 +14,9 @@ max_contacts_reported = 1
 script = ExtResource("1_v7oki")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("GradientTexture2D_t4vbm")
+position = Vector2(0, -1.0000017)
+scale = Vector2(1.2, 1.25)
+texture = ExtResource("2_v8qja")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_2b2rl")

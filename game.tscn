@@ -115,7 +115,7 @@ theme_override_styles/separator = SubResource("StyleBoxEmpty_e2o6t")
 [node name="Upgrades" type="HBoxContainer" parent="Display/Margins/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 4
-theme_override_constants/separation = 40
+theme_override_constants/separation = 50
 alignment = 1
 
 [node name="HealthUpgrade" type="VBoxContainer" parent="Display/Margins/VBoxContainer/Upgrades"]
@@ -123,11 +123,13 @@ layout_mode = 2
 theme_override_constants/separation = 10
 
 [node name="HealthButton" parent="Display/Margins/VBoxContainer/Upgrades/HealthUpgrade" instance=ExtResource("5_7jktm")]
+unique_name_in_owner = true
 modulate = Color(0.86591214, 0.4614539, 0.42285526, 1)
 layout_mode = 2
 text = "Upgrade Health"
 
-[node name="Cost" type="Label" parent="Display/Margins/VBoxContainer/Upgrades/HealthUpgrade"]
+[node name="HealthCost" type="Label" parent="Display/Margins/VBoxContainer/Upgrades/HealthUpgrade"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Upgrade Cost: 10%"
 label_settings = SubResource("LabelSettings_ryrav")
@@ -138,11 +140,13 @@ layout_mode = 2
 theme_override_constants/separation = 10
 
 [node name="DamageButton" parent="Display/Margins/VBoxContainer/Upgrades/DamageUpgrade" instance=ExtResource("5_7jktm")]
+unique_name_in_owner = true
 modulate = Color(0.74285364, 0.66447556, 1.540184e-06, 1)
 layout_mode = 2
 text = "Upgrade Damage"
 
-[node name="Cost" type="Label" parent="Display/Margins/VBoxContainer/Upgrades/DamageUpgrade"]
+[node name="DamageCost" type="Label" parent="Display/Margins/VBoxContainer/Upgrades/DamageUpgrade"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Upgrade Cost: 10%"
 label_settings = SubResource("LabelSettings_ryrav")
@@ -153,11 +157,13 @@ layout_mode = 2
 theme_override_constants/separation = 10
 
 [node name="FireRateButton" parent="Display/Margins/VBoxContainer/Upgrades/FireRateUpgrade" instance=ExtResource("5_7jktm")]
+unique_name_in_owner = true
 modulate = Color(0.22129604, 0.69358057, 0.9999998, 1)
 layout_mode = 2
 text = "Upgrade Fire Rate"
 
-[node name="Cost" type="Label" parent="Display/Margins/VBoxContainer/Upgrades/FireRateUpgrade"]
+[node name="FireRateCost" type="Label" parent="Display/Margins/VBoxContainer/Upgrades/FireRateUpgrade"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Upgrade Cost: 10%"
 label_settings = SubResource("LabelSettings_ryrav")
@@ -168,11 +174,13 @@ layout_mode = 2
 theme_override_constants/separation = 10
 
 [node name="RangeButton" parent="Display/Margins/VBoxContainer/Upgrades/RangeUpgrade" instance=ExtResource("5_7jktm")]
+unique_name_in_owner = true
 modulate = Color(0.4052964, 0.76290244, 7.70092e-07, 1)
 layout_mode = 2
 text = "Upgrade Range"
 
-[node name="Cost" type="Label" parent="Display/Margins/VBoxContainer/Upgrades/RangeUpgrade"]
+[node name="RangeCost" type="Label" parent="Display/Margins/VBoxContainer/Upgrades/RangeUpgrade"]
+unique_name_in_owner = true
 layout_mode = 2
 text = "Upgrade Cost: 10%"
 label_settings = SubResource("LabelSettings_ryrav")
@@ -234,3 +242,4 @@ horizontal_alignment = 1
 [connection signal="timeout" from="SeasonTimer" to="." method="_on_season_timer_timeout"]
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
 [connection signal="health_updated" from="Player" to="." method="_on_player_health_updated"]
+[connection signal="pressed" from="Display/Margins/VBoxContainer/Upgrades/HealthUpgrade/HealthButton" to="." method="_on_health_button_pressed"]

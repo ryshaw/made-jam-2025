@@ -2,6 +2,11 @@ extends Area2D
 
 signal health_updated(new_val : int, max_val : int)
 
+var default_health : int = 10
+var default_damage : int = 1
+var default_fire_rate : float = 0.6
+var default_range : int = 350
+
 @export var health : int = 10
 @export var max_health : int = 10
 @export var damage : int = 1
@@ -11,8 +16,6 @@ signal health_updated(new_val : int, max_val : int)
 var enemy_targets : Array[Enemy] = []
 @onready var sprite = $Sprite2D
 var current_target : Enemy
-
-	
 
 func _ready() -> void:
 	$FireTimer.start(fire_rate)
@@ -64,9 +67,10 @@ func _on_fire_timer_timeout() -> void:
 
 	add_child(bullet)
 
-
-
-
 func _on_game_season_change(season: int) -> void:
-	print("Attempt change")
 	sprite.frame = season
+	max_health = default_health
+	health = max_health
+	damage = default_damage
+	fire_rate = default_fire_rate
+	fire_range = default_range

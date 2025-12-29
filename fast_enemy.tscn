@@ -12,6 +12,8 @@ colors = PackedColorArray(0.90608966, 0.4463721, 0.14195609, 1)
 gradient = SubResource("Gradient_qckmv")
 
 [node name="FastEnemy" type="RigidBody2D" groups=["enemy"]]
+collision_layer = 2
+collision_mask = 5
 gravity_scale = 0.0
 script = ExtResource("1_qckmv")
 speed = 200.0

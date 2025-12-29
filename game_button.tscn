@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://4r4urahws6qf"]
+[gd_scene load_steps=6 format=3 uid="uid://4r4urahws6qf"]
 
 [ext_resource type="Script" uid="uid://ct1gjrbdkf4j5" path="res://game_button.gd" id="1_l7edf"]
 
@@ -62,21 +62,6 @@ expand_margin_left = 4.0
 expand_margin_top = 4.0
 expand_margin_right = 4.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_l7edf"]
-bg_color = Color(1, 1, 1, 0.23529412)
-border_width_left = 16
-border_width_top = 16
-border_width_right = 16
-border_width_bottom = 16
-border_color = Color(1, 1, 1, 1)
-corner_radius_top_left = 32
-corner_radius_top_right = 32
-corner_radius_bottom_right = 32
-corner_radius_bottom_left = 32
-expand_margin_left = 4.0
-expand_margin_top = 4.0
-expand_margin_right = 4.0
-
 [node name="GameButton" type="Button"]
 custom_minimum_size = Vector2(400, 120)
 offset_right = 320.0
@@ -89,13 +74,3 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_hmms1")
 theme_override_styles/focus = SubResource("StyleBoxFlat_msw87")
 text = "GameButton"
 script = ExtResource("1_l7edf")
-
-[node name="Highlight" type="Panel" parent="."]
-visible = false
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_l7edf")

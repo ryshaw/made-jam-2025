@@ -1,4 +1,4 @@
-extends Area2D
+class_name Player extends Area2D
 
 signal health_updated(new_val : int, max_val : int)
 

@@ -64,7 +64,7 @@ script = ExtResource("1_fc0e3")
 [node name="SeasonTimer" type="Timer" parent="."]
 
 [node name="EnemyTimer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 2.0
 autostart = true
 
 [node name="Background" type="AnimatedSprite2D" parent="."]
@@ -253,8 +253,8 @@ text = "press anything to restart game"
 label_settings = SubResource("LabelSettings_7jktm")
 horizontal_alignment = 1
 
-[connection signal="seasonChange" from="." to="Player" method="_on_game_season_change"]
 [connection signal="seasonChange" from="." to="Background" method="_on_game_season_change"]
+[connection signal="seasonChange" from="." to="Player" method="_on_game_season_change"]
 [connection signal="timeout" from="SeasonTimer" to="." method="_on_season_timer_timeout"]
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
 [connection signal="health_updated" from="Player" to="." method="_on_player_health_updated"]

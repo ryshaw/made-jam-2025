@@ -99,24 +99,33 @@ func _on_health_button_pressed() -> void:
 		xp -= health_xp_needed
 		%XPBar.update_value(xp, max_xp)
 		update_upgrade_costs("health")
+		$Player.max_health += 5
+		$Player.health += 8
+		$Player.health = clampi($Player.health, 0, $Player.max_health)
+		%HealthBar.update_value($Player.health, $Player.max_health)
 		
 func _on_damage_button_pressed() -> void:
 	if xp >= damage_xp_needed:
 		xp -= damage_xp_needed
 		%XPBar.update_value(xp, max_xp)
 		update_upgrade_costs("damage")
+		$Player.damage += 1
 		
 func _on_fire_rate_button_pressed() -> void:
 	if xp >= fire_rate_xp_needed:
 		xp -= fire_rate_xp_needed
 		%XPBar.update_value(xp, max_xp)
 		update_upgrade_costs("fire_rate")
+		$Player.fire_rate *= 0.7
+		print($Player.fire_rate)
 		
 func _on_range_button_pressed() -> void:
 	if xp >= range_xp_needed:
 		xp -= range_xp_needed
 		%XPBar.update_value(xp, max_xp)
 		update_upgrade_costs("range")
+		$Player.fire_range *= 1.2
+		print($Player.fire_range)
 
 func update_upgrade_costs(except_for : String):
 	health_xp_needed += 4

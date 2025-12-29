@@ -1,0 +1,112 @@
+[gd_scene load_steps=9 format=3 uid="uid://lqiau5j52a31"]
+
+[ext_resource type="PackedScene" uid="uid://qjg3h4w3liqo" path="res://player.tscn" id="1_80nbo"]
+[ext_resource type="Script" uid="uid://dd2lbi1f60vup" path="res://game.gd" id="1_fc0e3"]
+[ext_resource type="PackedScene" uid="uid://cy1o7ymn3vbf6" path="res://base_button.tscn" id="2_e2o6t"]
+[ext_resource type="PackedScene" uid="uid://dw710ilgm08gg" path="res://base_bar.tscn" id="2_feb5d"]
+
+[sub_resource type="Gradient" id="Gradient_e2o6t"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1.6364455e-06, 0.43669292, 0.00832662, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_feb5d"]
+gradient = SubResource("Gradient_e2o6t")
+width = 1920
+height = 1080
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fc0e3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e2o6t"]
+
+[node name="Game" type="Node"]
+script = ExtResource("1_fc0e3")
+
+[node name="SeasonTimer" type="Timer" parent="."]
+wait_time = 30.0
+autostart = true
+
+[node name="EnemyTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="Background" type="Sprite2D" parent="."]
+position = Vector2(960, 540)
+texture = SubResource("GradientTexture2D_feb5d")
+
+[node name="Player" parent="." instance=ExtResource("1_80nbo")]
+position = Vector2(960, 540)
+
+[node name="Display" type="CanvasLayer" parent="."]
+
+[node name="Margins" type="MarginContainer" parent="Display"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Display/Margins"]
+layout_mode = 2
+
+[node name="Bars" type="HBoxContainer" parent="Display/Margins/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="HealthBar" parent="Display/Margins/VBoxContainer/Bars" instance=ExtResource("2_feb5d")]
+unique_name_in_owner = true
+layout_mode = 2
+label_text = "Health"
+bar_color = Color(0.91332746, 0.33133173, 0.34241337, 1)
+
+[node name="VSeparator" type="VSeparator" parent="Display/Margins/VBoxContainer/Bars"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_fc0e3")
+
+[node name="SeasonBar" parent="Display/Margins/VBoxContainer/Bars" instance=ExtResource("2_feb5d")]
+unique_name_in_owner = true
+layout_mode = 2
+label_text = "Time to Next Season"
+
+[node name="VSeparator2" type="VSeparator" parent="Display/Margins/VBoxContainer/Bars"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_fc0e3")
+
+[node name="XPBar" parent="Display/Margins/VBoxContainer/Bars" instance=ExtResource("2_feb5d")]
+unique_name_in_owner = true
+layout_mode = 2
+label_text = "XP"
+bar_color = Color(0.40784314, 1, 1, 1)
+
+[node name="MiddleGap" type="HSeparator" parent="Display/Margins/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/separator = SubResource("StyleBoxEmpty_e2o6t")
+
+[node name="Upgrades" type="HBoxContainer" parent="Display/Margins/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 100
+alignment = 1
+
+[node name="BaseButton" parent="Display/Margins/VBoxContainer/Upgrades" instance=ExtResource("2_e2o6t")]
+layout_mode = 2
+
+[node name="BaseButton2" parent="Display/Margins/VBoxContainer/Upgrades" instance=ExtResource("2_e2o6t")]
+layout_mode = 2
+
+[node name="BaseButton3" parent="Display/Margins/VBoxContainer/Upgrades" instance=ExtResource("2_e2o6t")]
+layout_mode = 2
+
+[node name="BaseButton4" parent="Display/Margins/VBoxContainer/Upgrades" instance=ExtResource("2_e2o6t")]
+layout_mode = 2
+
+[connection signal="seasonChange" from="." to="Player" method="_on_game_season_change"]
+[connection signal="timeout" from="SeasonTimer" to="." method="_on_season_timer_timeout"]
+[connection signal="timeout" from="EnemyTimer" to="." method="_on_enemy_timer_timeout"]
+[connection signal="health_updated" from="Player" to="." method="_on_player_health_updated"]

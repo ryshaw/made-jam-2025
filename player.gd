@@ -55,7 +55,12 @@ func _on_fire_timer_timeout() -> void:
 		
 	if not current_target:
 		if enemy_targets.is_empty(): return
-		else: current_target = enemy_targets.get(0)
+		else:
+			if is_instance_valid(enemy_targets.get(0)):
+				current_target = enemy_targets.get(0)
+			else: 
+				enemy_targets.remove_at(0)
+				return
 	
 	var bullet : Bullet = bullet_scene.instantiate()
 	

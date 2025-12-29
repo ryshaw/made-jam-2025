@@ -78,6 +78,7 @@ func _on_enemy_timer_timeout() -> void:
 func _on_give_xp_on_death(val : int):
 	if game_over: return
 	xp += val
+	xp = clampi(xp, 0, max_xp)
 	%XPBar.update_value(xp, max_xp)
 
 func _unhandled_input(_event: InputEvent) -> void:
@@ -132,7 +133,6 @@ func _on_range_button_pressed() -> void:
 		%XPBar.update_value(xp, max_xp)
 		update_upgrade_costs("range")
 		$Player.fire_range *= 1.2
-		print($Player.fire_range)
 		$Player.queue_redraw()
 
 func update_upgrade_costs(except_for : String):

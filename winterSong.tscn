@@ -1,0 +1,37 @@
+[gd_scene load_steps=8 format=3 uid="uid://8mogqydn5rqs"]
+
+[ext_resource type="AudioStream" uid="uid://c315hdl4i4ot8" path="res://winter-stem-1.wav" id="1_asp8l"]
+[ext_resource type="AudioStream" uid="uid://cbkc2aoy27a0r" path="res://winter-stem-4.wav" id="2_x48ee"]
+[ext_resource type="AudioStream" uid="uid://c54730thclowh" path="res://winter-stem-2.wav" id="3_l2qdo"]
+[ext_resource type="AudioStream" uid="uid://swcdxyuxk43a" path="res://winter-stem-3.wav" id="4_r8qgv"]
+[ext_resource type="AudioStream" uid="uid://df0os36mcsggp" path="res://winter-stem-5.wav" id="5_upyxk"]
+[ext_resource type="Script" uid="uid://bbj8gscai861t" path="res://springAudio.gd" id="6_5njg5"]
+
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_aiexs"]
+stream_count = 5
+stream_0/stream = ExtResource("1_asp8l")
+stream_0/volume = 0.0
+stream_1/stream = ExtResource("2_x48ee")
+stream_1/volume = -60.0
+stream_2/stream = ExtResource("3_l2qdo")
+stream_2/volume = -60.0
+stream_3/stream = ExtResource("4_r8qgv")
+stream_3/volume = -60.0
+stream_4/stream = ExtResource("5_upyxk")
+stream_4/volume = -60.0
+
+[node name="winterSong" type="AudioStreamPlayer2D"]
+stream = SubResource("AudioStreamSynchronized_aiexs")
+autoplay = true
+script = ExtResource("6_5njg5")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[node name="Timer2" type="Timer" parent="."]
+wait_time = 60.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="add_next_stem"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]

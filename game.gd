@@ -13,7 +13,7 @@ var damage_xp_needed : int
 var fire_rate_xp_needed : int
 var range_xp_needed : int
 var song 
-@export var songs = [load("res://springSong.tscn"),load("res://summerSong.tscn"),load("res://fallSong.tscn")]
+@export var songs = [load("res://springSong.tscn"),load("res://summerSong.tscn"),load("res://fallSong.tscn"),load("res://winterSong.tscn")]
 @onready var audio = $AudioStreamPlayer
 var enemy_time : float = 2.5
 var difficulty : int = 0 # 0 is nothing, 1 easy, 2 medium, 3 hard
@@ -162,8 +162,6 @@ func _on_range_button_pressed() -> void:
 		$Player.queue_redraw()
 
 func changeMusic():
-	var current = current_season
-	if (current < 3):
 		song = songs[current_season].instantiate()
 		add_child(song)
 

@@ -2,12 +2,12 @@
 
 [ext_resource type="Script" uid="uid://c1xx8c0q51obm" path="res://bullet.gd" id="1_v7oki"]
 
-[sub_resource type="Gradient" id="Gradient_v8qja"]
+[sub_resource type="Gradient" id="Gradient_v7oki"]
 offsets = PackedFloat32Array(0)
 colors = PackedColorArray(0.3553848, 0.001226564, 0.83332, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_t4vbm"]
-gradient = SubResource("Gradient_v8qja")
+gradient = SubResource("Gradient_v7oki")
 width = 16
 height = 16
 

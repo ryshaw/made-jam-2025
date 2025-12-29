@@ -48,7 +48,6 @@ window/stretch/mode="canvas_items"
 [global_group]
 
 enemy=""
-enemybullet=""
 
 [layer_names]
 

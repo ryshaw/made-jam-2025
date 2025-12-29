@@ -22,7 +22,7 @@ height = 1080
 script = ExtResource("1_fc0e3")
 
 [node name="SeasonTimer" type="Timer" parent="."]
-wait_time = 20.0
+wait_time = 30.0
 autostart = true
 
 [node name="EnemyTimer" type="Timer" parent="."]

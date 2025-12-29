@@ -5,7 +5,7 @@ signal health_updated(new_val : int, max_val : int)
 @export var health : int = 10
 @export var max_health : int = 10
 @export var damage : int = 1
-@export var fire_range : int = 500
+@export var fire_range : int = 300
 @export var fire_rate : float = 0.5
 @onready var bullet_scene : PackedScene = preload("res://bullet.tscn")
 var enemy_targets : Array[Enemy] = []
@@ -21,12 +21,18 @@ func _ready() -> void:
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemy"):
 		var enemy : Enemy = body as Enemy
-		if not enemy: return
-		health -= enemy.damage
-		health_updated.emit(health, max_health)
-		enemy_targets.erase(enemy)
-		current_target = null
-		enemy.queue_free()
+		if enemy: 
+			health -= enemy.damage
+			health_updated.emit(health, max_health)
+			enemy_targets.erase(enemy)
+			current_target = null
+			enemy.queue_free()
+		else:
+			var enemy_bullet : EnemyBullet = body as EnemyBullet
+			if enemy_bullet: 
+				health -= enemy_bullet.damage
+				health_updated.emit(health, max_health)
+				enemy_bullet.queue_free()
 
 func _on_fire_range_body_entered(body: Node2D) -> void:
 	if body.is_in_group("enemy"):

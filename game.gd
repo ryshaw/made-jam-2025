@@ -2,7 +2,9 @@ extends Node
 
 enum SEASON { SPRING, SUMMER, FALL, WINTER }
 
-var current_season : SEASON = SEASON.SPRING
+var current_season : SEASON = SEASON.SUMMER
+var xp : int = 0
+var max_xp : int = 100
 
 # should always be (1920, 1080)
 @onready var window_size : Vector2 = get_viewport().get_visible_rect().size
@@ -42,5 +44,9 @@ func _on_enemy_timer_timeout() -> void:
 	
 	current_enemy.position = Vector2(x, y)
 	current_enemy.target = $Player
+	current_enemy.give_xp_on_death.connect(_on_give_xp_on_death)
 	add_child(current_enemy)
 	
+func _on_give_xp_on_death(val : int):
+	xp += val
+	%XPBar.update_value(xp, max_xp)

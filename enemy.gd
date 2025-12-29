@@ -1,18 +1,21 @@
 class_name Enemy extends RigidBody2D
 
-@export var speed: float;
-@export var health: int;
-@export var damage: int; 
-@export var target: Node2D;
+signal give_xp_on_death(val : int)
+
+@export var speed: float = 100.0
+@export var health: int = 3
+@export var damage: int = 1
+@export var target: Node2D
+@export var xp_on_death : int = 2
 var isAlive : bool = true
 
 func take_damage(amount : int):
 	apply_central_impulse(-1 * linear_velocity)
 	health -= amount
-	print("Health Left: ",health)
-	if(health <= 0): 
+
+	if (health <= 0): 
 		isAlive = false
-		print("I died blehhh")
+		give_xp_on_death.emit(2)
 
 func _physics_process(_delta: float) -> void:
 	var dir = Vector2(target.position.x - self.position.x,target.position.y - self.position.y).normalized()

@@ -181,17 +181,17 @@ func update_upgrade_costs(except_for : String):
 func _on_easy_button_pressed() -> void:
 	enemy_time = 3.0
 	enemy_time_multiplier = 0.98
-	enemy_time_adjustment = 2.0
+	enemy_time_adjustment = 1.5
 	start_game()
 
 func _on_medium_button_pressed() -> void:
-	enemy_time = 2.5
-	enemy_time_multiplier = 0.96
-	enemy_time_adjustment = 2.0
+	enemy_time = 2.8
+	enemy_time_multiplier = 0.98
+	enemy_time_adjustment = 0.8
 	start_game()
 
 func _on_hard_button_pressed() -> void:
-	enemy_time = 2.0
-	enemy_time_multiplier = 0.92
-	enemy_time_adjustment = 3.0
+	enemy_time = 2.6
+	enemy_time_multiplier = 0.97
+	enemy_time_adjustment = 2.0
 	start_game()
